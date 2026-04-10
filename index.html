@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo</title>
+    <style>
+        .main{
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, rgb(52, 137, 133), rgb(137, 52, 52));
+            display:flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #content{
+            width: 450px;
+            /* background-color: rgb(133, 98, 98); */
+            background: #ebebeb;
+            padding: 40px 30px 70px;
+            border-radius: 10px;
+        }
+        h2{
+            color: rgb(2, 6, 77);
+        }
+        #input_feald{
+            /* border: red solid 1px; */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 30px;
+            padding-left: 10px;
+            /* margin-bottom: 25px; */
+        }
+        #lists{
+            border: none;
+            outline: none;
+            background: #dfdfdf;
+            padding: 5px 15px 5px;
+            /* font-weight: 10px; */
+            border-radius: 40px;
+            width: 70%;
+        }
+        button{
+            border: none;
+            outline: none;
+            padding: 6px 25px;
+            background: #b4b4b4c6;
+            cursor: pointer;
+            border-radius: 40px;
+        }
+        button:hover{
+            color: #a70505c5;
+            box-shadow: 3px 3px 5px #b9b9ba,
+                        -0.2rem -0.2rem 0.5rem #eaeaea;
+        }
+        button:active{
+            box-shadow: inset -3px -3px 7px #ffffff,
+                        inset 3px 3px 5px #b9b9ba;
+        }
+        #demo{
+            /* border: red solid 1px; */
+            padding: 2px;
+        }
+        ul li{
+            width: 425px;
+            /* border: red solid 1px; */
+            list-style: none; 
+            list-style-type: circle;
+            font-size: 17px;
+            font-family: Montserrat, sans-serif;
+            padding: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        ul li input{
+            order:-1
+        }
+        ul li span{
+            width: 25px;
+            display: flex;
+            justify-content: center;
+            padding: 2px;
+            font-size: 20px;
+            border-radius: 50%;
+            
+
+        }
+        ul li span:hover{
+            color: #a70505c5;
+            box-shadow: 3px 3px 5px #b9b9ba,
+                        -0.2rem -0.2rem 0.5rem #ffffff;
+        }
+        ul li span:active{
+            box-shadow: inset -3px -3px 7px #ffffff,
+                        inset 3px 3px 5px #b9b9ba;
+        }
+
+        li.comp{
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div id="content">
+            <h2>To-Do List</h2>
+            <div id="input_feald">
+                <input type="text" id="lists" placeholder="Add your text">
+                <button onclick="add()" >submit</button>
+            </div>
+            <ul id="demo">
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        lists = document.getElementById("lists")
+        demo = document.getElementById("demo")
+        function add(){
+            if(lists.value === ''){
+                alert('Enter something')
+            }
+            else{
+                node=document.createElement("li")
+                
+                p = document.createElement("p")
+                p.innerHTML=lists.value
+                node.appendChild(p)
+                demo.appendChild(node);
+
+                // to add checkboxes
+                chb = document.createElement("input")
+                chb.type="checkbox"
+                chb.addEventListener("click",function(){
+                    if(this.checked){
+                        p.style.textDecoration="line-through"
+                        p.style.color="#C3C8DE"
+                    }
+                    else{
+                        p.style.textDecoration="none"
+                        p.style.color="black"
+                    }
+                })
+                node.appendChild(chb)
+
+                // to add a feald
+                span = document.createElement("span")
+                span.innerHTML="\u00d7"
+                span.setAttribute("onclick", "this.parentNode.remove();");
+                node.appendChild(span)
+
+            }
+            lists.value =""
+        }
+    </script>
+
+</body>
+</html>
